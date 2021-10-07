@@ -1,1 +1,3 @@
-# minimal-online-text-editor
+# Minimal Online Text Editors
+Ephemeral texts.
+No features.
