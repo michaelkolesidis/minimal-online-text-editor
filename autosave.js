@@ -1,4 +1,4 @@
-// Auto-save
+// Auto-save functionality
 
 document.getElementById('text').innerHTML = localStorage['text'] || 'Text';
 
