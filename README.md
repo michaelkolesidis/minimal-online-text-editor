@@ -1,4 +1,4 @@
-# Minimal Online Text Editors
+# Minimal Online Text Editor
 Ephemeral texts.<br>
 No features.
 
