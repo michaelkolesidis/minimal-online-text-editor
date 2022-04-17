@@ -10,7 +10,7 @@ No features.
   <br>
   <br>
 
-  <a href="https://en.wikipedia.org/wiki/Linux"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Made_with_Linux.png/240px-Made_with_Linux.png"></a>
+  <a href="https://github.com/michaelkolesidis/made-with-linux" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Made_with_Linux.png/240px-Made_with_Linux.png"></a>
 </div>
 <br>                                                      
 <div align="center">
