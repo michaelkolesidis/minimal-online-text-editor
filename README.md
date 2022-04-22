@@ -4,6 +4,10 @@ No features.
 
 <img src="https://github.com/michaelkolesidis/minimal-online-text-editor/blob/main/minimal-screenshot.png">
 
+## License
+
+Copyright (c) 2022 Michael Kolesidis<br>
+Licensed under the [GNU General Public License v3.0](https://github.com/michaelkolesidis/webproject-script/blob/main/LICENSE).
 
 [//]: # (Free Software)
 <div align="center">
