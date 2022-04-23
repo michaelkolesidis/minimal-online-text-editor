@@ -4,6 +4,10 @@ No features.
 
 <img src="https://github.com/michaelkolesidis/minimal-online-text-editor/blob/main/minimal-screenshot.png">
 
+
+## Description
+Artistic project consisting of a simple HTML element, containing a poem. I think of it as a form of installation art for the web. It saves its contents to localStorage.
+
 ## License
 
 Copyright (c) 2022 Michael Kolesidis<br>
