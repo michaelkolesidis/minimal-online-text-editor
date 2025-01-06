@@ -1,26 +1,17 @@
-# Minimal Online Text Editor
-Ephemeral texts.<br>
+# Minimal Online Text Editor (MOTE)
+
+Ephemeral texts.  
 No features.
 
-<img src="https://github.com/michaelkolesidis/minimal-online-text-editor/blob/main/minimal-screenshot.png">
-
+![Screenshot](./screenshot.png)
 
 ## Description
-Artistic project consisting of a simple HTML element, containing a poem. I think of it as a form of installation art for the web. It saves its contents to localStorage.
+
+A minimalist, distraction-free online text editor inspired by Zen principles. It offers three essential features: a live word counter, automatic text-saving to local storage, and the ability to download your text.
+
+More than a tool, it’s also an art project—a digital installation that explores the harmony between utility and aesthetics on the web.
 
 ## License
 
-Copyright (c) 2022 Michael Kolesidis<br>
-Licensed under the [GNU General Public License v3.0](https://github.com/michaelkolesidis/webproject-script/blob/main/LICENSE).
-
-[//]: # (Free Software)
-<div align="center">
-  <br>
-  <br>
-
-  <a href="https://github.com/michaelkolesidis/made-with-linux" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Made_with_Linux.png/240px-Made_with_Linux.png"></a>
-</div>
-<br>                                                      
-<div align="center">
-  <a href="https://endsoftwarepatents.org/innovating-without-patents"><img style="height: 90px;" src="https://static.fsf.org/nosvn/esp/logos/innovating-without-patents.svg"></a>
-</div>
+Copyright (c) Michael Kolesidis  
+Licensed under the [GNU Affero General Public License v3.0](https://www.gnu.org/licenses/agpl-3.0.html).

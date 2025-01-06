@@ -1,18 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', Helvetica, sans-serif;
+  color: #dedede;
+  background-color: #0f0f0f;
+  box-sizing: border-box;
+}
+
+::selection {
+  background-color: #dedede;
+  color: #0f0f0f;
+}
+
 html,
 body {
-    font-family: Helvetica, sans-serif;
-    font-size: 1.2rem;
+  height: 100%;
+  margin: 0;
+  font-family: Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.wrapper {
+    min-height: 80vh; /* Occupy only 80% of the viewport height */
+    margin-bottom: 20vh; /* Add empty space at the bottom */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content {
+    flex: 1; /* Ensures content stretches as needed */
+  }
+
+/* Style for the entire page's scrollbar */
+html::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+html::-webkit-scrollbar-thumb {
+  background-color: #dedede; /* Color of the scrollbar thumb */
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent; /* Transparent track */
 }
 
 #title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin: 1rem;
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin: 1rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  line-height: 20px;
+  transform: rotate(-45deg);
+  user-select: none;
 }
 
-#text {
-    border: 0.2rem solid black;
-    max-width: 100ch;
-    min-height: 50rem;
-    margin: 1rem;
+#title-gap {
+  background-color: #0f0f0f00;
+  font-size: 1.5em;
+}
+
+#text-area {
+  min-width: 60ch;
+  max-width: 80%;
+  min-height: 70vh;
+  resize: none;
+  overflow: hidden; /* Ensures no scrollbars appear */
+  padding: 10px;
+  font-family: Helvetica, sans-serif;
+  font-size: 1.2rem;
+  border: none;
+  outline: none;
+  margin-top: 20%;
+  color: #dedede;
+  margin-bottom: 20%;
+}
+
+#word-counter {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  visibility: hidden; /* Initially hidden */
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  margin: 1em;
+  letter-spacing: 0.2em;
+  font-size: 0.6em;
+}
+
+#download-btn {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 30px solid #dedede;
+  cursor: pointer;
+  outline: none;
+  position: fixed;
+  right: 0;
+  top: 0;
+  user-select: none;
+  margin: 1rem;
+  border-bottom: none;
+}
+
+#download-btn:hover {
+  border-top-color: #dedede;
 }
