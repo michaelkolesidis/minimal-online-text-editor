@@ -1,7 +1,6 @@
 # Minimal Online Text Editor (MOTE)
 
-Ephemeral texts.  
-No features.
+Ephemeral texts.
 
 ![Screenshot](./screenshot.png)
 
