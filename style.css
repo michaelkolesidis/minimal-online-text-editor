@@ -59,6 +59,12 @@ html::-webkit-scrollbar-track {
   margin-top: 20%;
   color: #dedede;
   margin-bottom: 20%;
+  caret-color: #dedede;
+}
+
+textarea::selection {
+  color: #0f0f0f;
+  background-color: #dedede;
 }
 
 #word-counter {
