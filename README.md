@@ -2,7 +2,7 @@
 
 Ephemeral texts.
 
-![Screenshot](./screenshot.png)
+![Screenshot](./mote-screenshot.png)
 
 ## Description
 

@@ -1,5 +1,18 @@
 const textarea = document.getElementById('text-area');
 const wordCounter = document.getElementById('word-counter');
+const downloadButton = document.getElementById('download-btn');
+const fullscreenButton = document.getElementById('fullscreen-btn');
+
+// Load saved content from localStorage when the page loads
+window.onload = () => {
+  const savedText = localStorage.getItem('autosaveText');
+  if (savedText) {
+    textarea.value = savedText;
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+    updateWordCounter();
+  }
+};
 
 // Function to count words
 const countWords = (text) => {
@@ -23,33 +36,16 @@ const updateWordCounter = () => {
 
 // Automatically adjust the height of the textarea as the text grows
 textarea.addEventListener('input', () => {
-  // Save the current scroll position before modifying the textarea height
   const currentScroll = textarea.scrollTop;
-
-  // Reset height to auto to calculate the new height
   textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px'; // Adjust height to match content height
-
-  // After the height is adjusted, restore the scroll position
+  textarea.style.height = textarea.scrollHeight + 'px';
   textarea.scrollTop = currentScroll;
-
-  updateWordCounter(); // Update word counter on input
+  updateWordCounter();
 });
-
-// Load saved content from localStorage when the page loads
-window.onload = () => {
-  const savedText = localStorage.getItem('autosaveText');
-  if (savedText) {
-    textarea.value = savedText;
-    textarea.style.height = 'auto'; // Adjust the height on load
-    textarea.style.height = textarea.scrollHeight + 'px'; // Set the height to match the content height
-    updateWordCounter(); // Update the word counter on input
-  }
-};
 
 // Autosave the content to localStorage every second after the last input
 let timeout;
-let saveInterval = 1000; // Save 1 second after the last keystroke
+let saveInterval = 10; // Save 0.01 seconds after the last keystroke
 textarea.addEventListener('input', () => {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
@@ -64,11 +60,23 @@ function downloadTextAsFile() {
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
-  link.download = 'textfile.txt'; // Default filename
+  link.download = 'mote-text.txt';
   link.click(); // Programmatically click the download link
 }
 
 // Add event listener to the download button
-document
-  .getElementById('download-btn')
-  .addEventListener('click', downloadTextAsFile);
+downloadButton.addEventListener('click', downloadTextAsFile);
+
+// Fullscreen
+fullscreenButton.addEventListener('click', function () {
+  // Check if the document can go fullscreen
+  if (document.documentElement.requestFullscreen) {
+    document.documentElement.requestFullscreen();
+  } else if (document.documentElement.mozRequestFullScreen) {
+    document.documentElement.mozRequestFullScreen();
+  } else if (document.documentElement.webkitRequestFullscreen) {
+    document.documentElement.webkitRequestFullscreen();
+  } else if (document.documentElement.msRequestFullscreen) {
+    document.documentElement.msRequestFullscreen();
+  }
+});
