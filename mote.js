@@ -3,7 +3,11 @@ const wordCounter = document.getElementById('word-counter');
 const downloadButton = document.getElementById('download-btn');
 const fullscreenButton = document.getElementById('fullscreen-btn');
 
-// Load saved content from localStorage when the page loads
+let timeout;
+let saveInterval = 10;
+let targetScrollY = window.scrollY;
+let isScrolling = false;
+
 window.onload = () => {
   const savedText = localStorage.getItem('autosaveText');
   if (savedText) {
@@ -12,9 +16,9 @@ window.onload = () => {
     textarea.style.height = textarea.scrollHeight + 'px';
     updateWordCounter();
   }
+  setTimeout(centerCurrentLine, 100);
 };
 
-// Function to count words
 const countWords = (text) => {
   const words = text
     .trim()
@@ -23,7 +27,6 @@ const countWords = (text) => {
   return words.length;
 };
 
-// Update word counter and visibility
 const updateWordCounter = () => {
   const wordCount = countWords(textarea.value);
   if (wordCount > 0) {
@@ -34,42 +37,114 @@ const updateWordCounter = () => {
   }
 };
 
-// Automatically adjust the height of the textarea as the text grows
+function lerpScroll() {
+  const currentY = window.scrollY;
+  const diff = targetScrollY - currentY;
+
+  if (Math.abs(diff) > 1) {
+    window.scrollTo(0, currentY + diff * 0.15);
+    requestAnimationFrame(lerpScroll);
+  } else {
+    window.scrollTo(0, targetScrollY);
+    isScrolling = false;
+  }
+}
+
+const getCaretYPosition = () => {
+  let clone = document.getElementById('mote-textarea-clone');
+
+  if (!clone) {
+    clone = document.createElement('div');
+    clone.id = 'mote-textarea-clone';
+    document.body.appendChild(clone);
+
+    const computed = window.getComputedStyle(textarea);
+    const stylesToCopy = [
+      'fontFamily',
+      'fontSize',
+      'fontWeight',
+      'fontStyle',
+      'letterSpacing',
+      'lineHeight',
+      'paddingTop',
+      'paddingBottom',
+      'paddingLeft',
+      'paddingRight',
+      'boxSizing',
+    ];
+    stylesToCopy.forEach((style) => (clone.style[style] = computed[style]));
+
+    clone.style.position = 'absolute';
+    clone.style.visibility = 'hidden';
+    clone.style.whiteSpace = 'pre-wrap';
+    clone.style.wordWrap = 'break-word';
+    clone.style.top = '0';
+    clone.style.left = '0';
+  }
+
+  clone.style.width = window.getComputedStyle(textarea).width;
+  const textUpToCaret = textarea.value.substring(0, textarea.selectionStart);
+  clone.textContent = textUpToCaret;
+
+  if (textUpToCaret.endsWith('\n')) {
+    clone.textContent += ' ';
+  }
+
+  const marker = document.createElement('span');
+  marker.textContent = '|';
+  clone.appendChild(marker);
+
+  return marker.offsetTop;
+};
+
+const centerCurrentLine = () => {
+  const caretY = getCaretYPosition();
+  const textareaRect = textarea.getBoundingClientRect();
+  const absoluteCaretTop = textareaRect.top + window.scrollY + caretY;
+
+  targetScrollY = absoluteCaretTop - window.innerHeight / 2;
+
+  if (!isScrolling) {
+    isScrolling = true;
+    requestAnimationFrame(lerpScroll);
+  }
+};
+
 textarea.addEventListener('input', () => {
   const currentScroll = textarea.scrollTop;
   textarea.style.height = 'auto';
   textarea.style.height = textarea.scrollHeight + 'px';
   textarea.scrollTop = currentScroll;
   updateWordCounter();
-});
+  centerCurrentLine();
 
-// Autosave the content to localStorage every second after the last input
-let timeout;
-let saveInterval = 10; // Save 0.01 seconds after the last keystroke
-textarea.addEventListener('input', () => {
   clearTimeout(timeout);
   timeout = setTimeout(() => {
     localStorage.setItem('autosaveText', textarea.value);
-    console.log('Text saved!');
   }, saveInterval);
 });
 
-// Function to download the text as a .txt file
+textarea.addEventListener('keyup', (e) => {
+  if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+    centerCurrentLine();
+  }
+});
+
+textarea.addEventListener('click', centerCurrentLine);
+window.addEventListener('resize', centerCurrentLine);
+
 function downloadTextAsFile() {
-  const text = document.getElementById('text-area').value;
+  const text = textarea.value;
   const blob = new Blob([text], { type: 'text/plain' });
   const link = document.createElement('a');
   link.href = URL.createObjectURL(blob);
   link.download = 'mote-text.txt';
-  link.click(); // Programmatically click the download link
+  link.click();
 }
 
-// Add event listener to the download button
 downloadButton.addEventListener('click', downloadTextAsFile);
 
-// Fullscreen
 fullscreenButton.addEventListener('click', function () {
-  // Check if the document can go fullscreen
   if (document.documentElement.requestFullscreen) {
     document.documentElement.requestFullscreen();
   } else if (document.documentElement.mozRequestFullScreen) {
